@@ -95,7 +95,7 @@ app.post('/signup', (req, res) => {
             createdAt: new Date().toISOString(),
             userId
         };
-        return db.doc(`/users/${newUser.handle}`).set(userCredentials);
+        return admin.firestore().doc(`/users/${newUser.handle}`).set(userCredentials);
     })
     .then(() => {
         return res.status(201).json({ token });
