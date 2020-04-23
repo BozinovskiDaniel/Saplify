@@ -1,5 +1,5 @@
 const functions = require("firebase-functions");
-
+const { admin } = require("./util/admin");
 const express = require("express");
 const app = express();
 
@@ -41,7 +41,7 @@ app.get("/user", FBAuth, getAuthenticatedUser);
 exports.api = functions.https.onRequest(app);
 
 exports.createNotificationOnLike = functions.firestore
-  .document("/likes/{id}")
+  .document("likes/{id}")
   .onCreate((snapshot) => {
     admin
       .firestore()
@@ -71,7 +71,9 @@ exports.createNotificationOnLike = functions.firestore
 exports.deleteNotificationOnUnlike = functions.firestore
   .document("likes/{id}")
   .onDelete(() => {
-    db.doc(`/notifications/${snapshot.id}`)
+    admin
+      .firestore()
+      .doc(`/notifications/${snapshot.id}`)
       .delete()
       .then(() => {
         return;
@@ -83,7 +85,7 @@ exports.deleteNotificationOnUnlike = functions.firestore
   });
 
 exports.createNotificationOnComment = functions.firestore
-  .document("/comments/{id}")
+  .document("comments/{id}")
   .onCreate((snapshot) => {
     admin
       .firestore()
