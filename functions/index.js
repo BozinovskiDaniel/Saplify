@@ -70,7 +70,7 @@ exports.createNotificationOnLike = functions.firestore
 
 exports.deleteNotificationOnUnlike = functions.firestore
   .document("likes/{id}")
-  .onDelete(() => {
+  .onDelete((snapshot) => {
     admin
       .firestore()
       .doc(`/notifications/${snapshot.id}`)
