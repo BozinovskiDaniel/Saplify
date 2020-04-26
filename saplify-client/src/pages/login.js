@@ -12,6 +12,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+// Redux Stuff
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
+
 const styles = (theme) => ({
   ...theme.spreadThis,
 });
@@ -19,32 +23,21 @@ const styles = (theme) => ({
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const { classes } = props;
+
+  const {
+    classes,
+    UI: { loading },
+  } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
     // Send request to server
     const userData = {
       email: email,
       password: password,
     };
-
-    axios
-      .post("login", userData)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        setLoading(false);
-        props.history.push("/");
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        setErrors(err.response.data);
-        setLoading(false);
-      });
+    props.loginUser(userData, props.history);
   };
 
   const handleChange = (e) => {
@@ -124,6 +117,21 @@ function Login(props) {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Login);
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionsToProps = {
+  loginUser,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(Login));
