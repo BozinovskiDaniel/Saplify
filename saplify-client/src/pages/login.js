@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import AppIcon from "../images/main.png";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 // Material UI Imports
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -9,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
   form: {
@@ -25,6 +27,15 @@ const styles = {
   },
   button: {
     marginTop: 20,
+    position: "relative",
+  },
+  customError: {
+    color: "red",
+    fontSize: "0.8rem",
+    marginTop: 10,
+  },
+  progress: {
+    position: "absolute",
   },
 };
 
@@ -32,7 +43,7 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { classes } = props;
 
   const handleSubmit = (e) => {
@@ -45,18 +56,15 @@ function Login(props) {
     };
 
     axios
-      .post(
-        "https://us-central1-saplify-48591.cloudfunctions.net/api/login",
-        userData
-      )
+      .post("login", userData)
       .then((res) => {
         console.log(res.data);
         setLoading(false);
         props.history.push("/");
       })
       .catch((err) => {
-        console.log(err);
-        //setErrors({error: err.response.data});
+        console.log(err.response.data);
+        setErrors(err.response.data);
         setLoading(false);
       });
   };
@@ -108,14 +116,27 @@ function Login(props) {
             onChange={handleChange}
             fullWidth
           />
+          {errors.general && (
+            <Typography variant="body2" className={classes.customError}>
+              {errors.general}
+            </Typography>
+          )}
           <Button
             type="submit"
             variant="contained"
             color="primary"
             className={classes.button}
+            disabled={loading}
           >
             Login
+            {loading && (
+              <CircularProgress className={classes.progress} size={30} />
+            )}
           </Button>
+          <br />
+          <small>
+            Don't have an account? Sign up <Link to="/signup">here</Link>
+          </small>
         </form>
       </Grid>
       <Grid item sm />
