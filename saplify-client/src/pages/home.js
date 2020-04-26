@@ -11,7 +11,6 @@ export default function Home() {
     axios
       .get("/screams")
       .then((res) => {
-        console.log(res);
         setScreams(res.data);
       })
       .catch((err) => {
@@ -21,7 +20,7 @@ export default function Home() {
 
   let recentScreamsMarkup = screams ? (
     screams.map((scream) => {
-      return <Scream scream={scream} />;
+      return <Scream key={scream.screamId} scream={scream} />;
     })
   ) : (
     <p>Loading...</p>
