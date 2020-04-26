@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import Scream from "../components/Scream";
 // Material Ui Imports
 import Grid from "@material-ui/core/Grid";
 
 export default function Home() {
-  const { screams, setScreams } = useState(null);
+  const [screams, setScreams] = useState(null);
 
   useEffect(() => {
     axios
@@ -21,7 +21,7 @@ export default function Home() {
 
   let recentScreamsMarkup = screams ? (
     screams.map((scream) => {
-      <p>{scream.body}</p>;
+      return <Scream scream={scream} />;
     })
   ) : (
     <p>Loading...</p>
