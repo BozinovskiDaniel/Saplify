@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppIcon from "../images/main.png";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 // Material UI Imports
@@ -12,6 +11,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+// Redux Imports
+import { connect } from "react-redux";
+import { signupUser } from "../redux/actions/userActions";
+
 const styles = (theme) => ({
   ...theme.spreadThis,
 });
@@ -21,13 +24,22 @@ function Signup(props) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [handle, setHandle] = useState("");
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const { classes } = props;
+  const {
+    classes,
+    UI: { loading },
+  } = props;
+
+  useEffect(() => {
+    console.log(props);
+    if (props.UI.errors) {
+      setErrors(props.UI.errors);
+    }
+  }, [props]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    //setLoading(true);
     // Send request to server
     const newUserData = {
       email: email,
@@ -36,19 +48,7 @@ function Signup(props) {
       handle: handle,
     };
 
-    axios
-      .post("/signup", newUserData)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        setLoading(false);
-        props.history.push("/");
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        setErrors(err.response.data);
-        setLoading(false);
-      });
+    props.signupUser(newUserData, props.history);
   };
 
   const handleChange = (e) => {
@@ -103,7 +103,7 @@ function Signup(props) {
           <TextField
             id="confirmPassword"
             name="confirmPassword"
-            type="confirmPassword"
+            type="password"
             label="Confirm Password"
             className={classes.textField}
             helperText={errors.confirmPassword}
@@ -154,6 +154,16 @@ function Signup(props) {
 
 Signup.propTypes = {
   classes: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  UI: PropTypes.object.isRequired,
+  signupUser: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Signup);
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+export default connect(mapStateToProps, { signupUser })(
+  withStyles(styles)(Signup)
+);

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppIcon from "../images/main.png";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 // Material UI Imports
@@ -23,12 +22,19 @@ const styles = (theme) => ({
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(props);
 
   const {
     classes,
     UI: { loading },
   } = props;
+
+  useEffect(() => {
+    console.log(props);
+    if (props.UI.errors) {
+      setErrors(props.UI.errors);
+    }
+  }, [props]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
