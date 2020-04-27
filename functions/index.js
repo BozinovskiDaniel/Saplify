@@ -172,7 +172,5 @@ exports.onScreamDeleted = functions.firestore
         });
         return batch.commit();
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch((err) => console.error(err));
   });

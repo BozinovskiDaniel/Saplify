@@ -21,12 +21,16 @@ exports.getAllScreams = (req, res) => {
       });
       return res.json(screams);
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: err.code });
+    });
 };
 
 exports.postOneScream = (req, res) => {
-  if (req.body.body.trim() === "")
+  if (req.body.body.trim() === "") {
     return res.status(400).json({ body: "Body must not be empty" });
+  }
 
   const newScream = {
     body: req.body.body,
@@ -51,11 +55,9 @@ exports.postOneScream = (req, res) => {
       console.error(err);
     });
 };
-
-// Fetch a scream
+// Fetch one scream
 exports.getScream = (req, res) => {
   let screamData = {};
-
   admin
     .firestore()
     .doc(`/screams/${req.params.screamId}`)
@@ -66,7 +68,6 @@ exports.getScream = (req, res) => {
       }
       screamData = doc.data();
       screamData.screamId = doc.id;
-
       return admin
         .firestore()
         .collection("comments")
@@ -79,16 +80,14 @@ exports.getScream = (req, res) => {
       data.forEach((doc) => {
         screamData.comments.push(doc.data());
       });
-
       return res.json(screamData);
     })
     .catch((err) => {
       console.error(err);
-      return res.status(500).json({ error: err.code });
+      res.status(500).json({ error: err.code });
     });
 };
-
-// Comment on a scream
+// Comment on a comment
 exports.commentOnScream = (req, res) => {
   if (req.body.body.trim() === "")
     return res.status(400).json({ comment: "Must not be empty" });
@@ -100,15 +99,16 @@ exports.commentOnScream = (req, res) => {
     userHandle: req.user.handle,
     userImage: req.user.imageUrl,
   };
+  console.log(newComment);
 
-  // Check if scream exists
   admin
     .firestore()
     .doc(`/screams/${req.params.screamId}`)
     .get()
     .then((doc) => {
-      if (!doc.exists)
+      if (!doc.exists) {
         return res.status(404).json({ error: "Scream not found" });
+      }
       return doc.ref.update({ commentCount: doc.data().commentCount + 1 });
     })
     .then(() => {
@@ -118,15 +118,12 @@ exports.commentOnScream = (req, res) => {
       res.json(newComment);
     })
     .catch((err) => {
-      console.error(err);
-      return res.status(500).json({ error: "Something went wrong" });
+      console.log(err);
+      res.status(500).json({ error: "Something went wrong" });
     });
 };
-
 // Like a scream
 exports.likeScream = (req, res) => {
-  // Check if comment is already liked
-  // Check if scream itself exists
   const likeDocument = admin
     .firestore()
     .collection("likes")
@@ -168,7 +165,6 @@ exports.likeScream = (req, res) => {
             return res.json(screamData);
           });
       } else {
-        // We have a like, therefore cant like this
         return res.status(400).json({ error: "Scream already liked" });
       }
     })
@@ -178,7 +174,6 @@ exports.likeScream = (req, res) => {
     });
 };
 
-// Unlike a scream
 exports.unlikeScream = (req, res) => {
   const likeDocument = admin
     .firestore()
@@ -206,7 +201,6 @@ exports.unlikeScream = (req, res) => {
     })
     .then((data) => {
       if (data.empty) {
-        // We have a like, therefore cant like this
         return res.status(400).json({ error: "Scream not liked" });
       } else {
         return admin
@@ -218,7 +212,7 @@ exports.unlikeScream = (req, res) => {
             return screamDocument.update({ likeCount: screamData.likeCount });
           })
           .then(() => {
-            return res.json(screamData);
+            res.json(screamData);
           });
       }
     })
@@ -227,11 +221,9 @@ exports.unlikeScream = (req, res) => {
       res.status(500).json({ error: err.code });
     });
 };
-
 // Delete a scream
 exports.deleteScream = (req, res) => {
   const document = admin.firestore().doc(`/screams/${req.params.screamId}`);
-
   document
     .get()
     .then((doc) => {
