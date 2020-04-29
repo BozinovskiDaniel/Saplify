@@ -52,15 +52,7 @@ function Scream(props) {
 
   const {
     classes,
-    scream: {
-      body,
-      createdAt,
-      userImage,
-      userHandle,
-      screamId,
-      likeCount,
-      commentCount,
-    },
+    scream: { body, createdAt, userImage, userHandle, likeCount, commentCount },
     user: { authenticated },
   } = props;
 
@@ -105,7 +97,7 @@ function Scream(props) {
         <Typography variant="body1">{body}</Typography>
         {likeButton}
         <span>{likeCount} Likes</span>
-        <MyButton tip="comments">
+        <MyButton tip="Comments">
           <ChatIcon color="primary" />
         </MyButton>
         <span>{commentCount} </span>

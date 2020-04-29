@@ -45,8 +45,8 @@ function EditDetails(props) {
   };
 
   const handleChange = (event) => {
-    if (event.target.name == "bio") setBio(event.target.value);
-    else if (event.target.name == "website") setWebsite(event.target.value);
+    if (event.target.name === "bio") setBio(event.target.value);
+    else if (event.target.name === "website") setWebsite(event.target.value);
     else setLocation(event.target.value);
   };
 
