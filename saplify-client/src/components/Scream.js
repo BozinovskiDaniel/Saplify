@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { likeScream, unlikeScream } from "../redux/actions/dataActions";
 import PropTypes from "prop-types";
 import MyButton from "../util/myButton";
+import DeleteScream from "./DeleteScream";
+
 // Material-UI Stuff
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -18,6 +20,7 @@ import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 
 const styles = {
   card: {
+    position: "relative",
     display: "flex",
     marginBottom: 20,
   },
@@ -52,9 +55,25 @@ function Scream(props) {
 
   const {
     classes,
-    scream: { body, createdAt, userImage, userHandle, likeCount, commentCount },
-    user: { authenticated },
+    scream: {
+      body,
+      createdAt,
+      userImage,
+      userHandle,
+      likeCount,
+      commentCount,
+      screamId,
+    },
+    user: {
+      authenticated,
+      credentials: { handle },
+    },
   } = props;
+
+  const deleteButton =
+    authenticated && userHandle === handle ? (
+      <DeleteScream screamId={screamId} />
+    ) : null;
 
   dayjs.extend(relativeTime);
 
@@ -65,7 +84,7 @@ function Scream(props) {
       </Link>
     </MyButton>
   ) : likedScream() ? (
-    <MyButton tip="Undo Like" onClick={unlikeScream}>
+    <MyButton tip="Unlike" onClick={unlikeScream}>
       <FavoriteIcon color="primary" />
     </MyButton>
   ) : (
@@ -91,6 +110,7 @@ function Scream(props) {
           {" "}
           {userHandle}
         </Typography>
+        {deleteButton}
         <Typography variant="body2" color="textSecondary">
           {dayjs(createdAt).fromNow()}
         </Typography>

@@ -15,3 +15,4 @@ export const SET_SCREAMS = "SET_SCREAMS";
 export const SET_SCREAM = "SET_SCREAM";
 export const LIKE_SCREAM = "LIKE_SCREAMS";
 export const UNLIKE_SCREAM = "UNLIKE_SCREAMS";
+export const DELETE_SCREAM = "DELETE_SCREAM";
