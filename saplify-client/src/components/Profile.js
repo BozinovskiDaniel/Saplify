@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { logoutUser, uploadImage } from "../redux/actions/userActions";
 import EditDetails from "./EditDetails";
-
+import MyButton from "../util/myButton";
 // MUI Imports
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
@@ -108,11 +108,13 @@ function Profile(props) {
               hidden="hidden"
               onChange={handleImageChange}
             />
-            <Tooltip title="Edit profile picture" placement="top">
-              <IconButton onClick={handleEditPicture} className="button">
-                <EditIcon color="primary" />
-              </IconButton>
-            </Tooltip>
+            <MyButton
+              tip="Edit profile picture"
+              onClick={handleEditPicture}
+              btnClassName="button"
+            >
+              <EditIcon color="primary"></EditIcon>
+            </MyButton>
           </div>
           <hr />
           <div className="profile-details">
@@ -147,11 +149,9 @@ function Profile(props) {
             <CalendarToday color="primary" />{" "}
             <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
           </div>
-          <Tooltip title="Logout" placement="top">
-            <IconButton onClick={handleLogout}>
-              <KeyboardReturn color="primary" />
-            </IconButton>
-          </Tooltip>
+          <MyButton tip="Logout" onClick={handleLogout} btnClassName="button">
+            <KeyboardReturn color="primary"></KeyboardReturn>
+          </MyButton>
           <EditDetails />
         </div>
       </Paper>
