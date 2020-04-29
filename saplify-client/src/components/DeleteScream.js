@@ -1,10 +1,6 @@
 import React, { useState, Fragment } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { Link } from "react-router-dom";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { connect } from "react-redux";
-import { likeScream, unlikeScream } from "../redux/actions/dataActions";
 import PropTypes from "prop-types";
 import MyButton from "../util/myButton";
 import { deleteScream } from "../redux/actions/dataActions";
