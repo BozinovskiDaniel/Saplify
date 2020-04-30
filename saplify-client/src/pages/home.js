@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Scream from "../components/Scream";
-import Profile from "../components/Profile";
+import Scream from "../components/scream/Scream";
+import Profile from "../components/profile/Profile";
 import { connect } from "react-redux";
 import { getScreams } from "../redux/actions/dataActions";
 import PropTypes from "prop-types";

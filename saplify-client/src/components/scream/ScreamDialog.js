@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../util/myButton";
+import MyButton from "../../util/myButton";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import LikeButton from "./LikeButton";
@@ -20,7 +20,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 // Redux stuff
 import { connect } from "react-redux";
-import { getScream, clearErrors } from "../redux/actions/dataActions";
+import { getScream, clearErrors } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -124,7 +124,7 @@ function ScreamDialog(props) {
         <MyButton tip="Comments">
           <ChatIcon color="primary" />
         </MyButton>
-        <span>{commentCount} </span>
+        <span>{commentCount}</span>
       </Grid>
       <hr className={classes.visibleSeparator} />
     </Grid>
