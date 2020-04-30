@@ -23,13 +23,15 @@ function Home(props) {
   );
 
   return (
-    <Grid container spacing={8}>
-      <Grid item sm={8} xs={12}>
+    <Grid container spacing={2}>
+      <Grid item sm={1} />
+      <Grid item sm={7} xs={12}>
         {recentScreamsMarkup}
       </Grid>
-      <Grid item sm={4} xs={12}>
+      <Grid item sm={3} xs={12}>
         <Profile />
       </Grid>
+      <Grid item sm={1} />
     </Grid>
   );
 }
