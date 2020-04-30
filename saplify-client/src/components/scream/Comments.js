@@ -12,7 +12,8 @@ const styles = (theme) => ({
   ...theme.spreadThis,
   commentImage: {
     maxWidth: "100%",
-    height: 100,
+    height: "80%",
+    width: "100%",
     objectFit: "cover",
     borderRadius: "50%",
   },
