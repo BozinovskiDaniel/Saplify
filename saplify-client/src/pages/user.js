@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 // Redux
 import { connect } from "react-redux";
 
+// User Page
 function User(props) {
   const [profile, setProfile] = useState(null);
 
