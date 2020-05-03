@@ -84,7 +84,11 @@ function Scream(props) {
           <ChatIcon color="primary" />
         </MyButton>
         <span>{commentCount} </span>
-        <ScreamDialog screamId={screamId} userHandle={userHandle} />
+        <ScreamDialog
+          screamId={screamId}
+          userHandle={userHandle}
+          openDialog={props.openDialog}
+        />
       </CardContent>
     </Card>
   );
@@ -94,6 +98,7 @@ Scream.propTypes = {
   user: PropTypes.object.isRequired,
   scream: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
+  openDialog: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

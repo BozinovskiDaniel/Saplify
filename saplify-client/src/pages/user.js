@@ -14,9 +14,13 @@ import { connect } from "react-redux";
 // User Page
 function User(props) {
   const [profile, setProfile] = useState(null);
+  const [screamIdParam, setScreamIdParam] = useState(null);
 
   useEffect(() => {
     const handle = props.match.params.handle;
+    const screamId = props.match.params.screamId;
+
+    if (screamId) setScreamIdParam(screamId);
 
     props.getUserData(handle);
     axios
@@ -36,8 +40,14 @@ function User(props) {
     <p>...Loading Data...</p>
   ) : screams == null ? (
     <p>No screams from this user</p>
-  ) : (
+  ) : !screamIdParam ? (
     screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
+  ) : (
+    screams.map((scream) => {
+      if (scream.screamId != screamIdParam) {
+        return <Scream key={scream.screamId} scream={scream} />;
+      } else return <Scream key={scream.screamId} scream={scream} openDialog />;
+    })
   );
 
   return (

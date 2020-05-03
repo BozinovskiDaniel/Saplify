@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MyButton from "../../util/myButton";
 import PostScream from "../scream/PostScream";
+import Notifications from "./Notifications";
 
 // Material UI Imports
 import AppBar from "@material-ui/core/AppBar";
@@ -28,9 +29,7 @@ function Navbar(props) {
                 <HomeIcon />
               </MyButton>
             </Link>
-            <MyButton tip="Notifications">
-              <Notifications />
-            </MyButton>
+            <Notifications />
           </Fragment>
         ) : (
           <Fragment>
