@@ -4,6 +4,8 @@ import axios from "axios";
 import Scream from "../components/scream/Scream";
 import { getUserData } from "../redux/actions/dataActions";
 import StaticProfile from "../components/profile/StaticProfile";
+import ScreamSkeleton from "../util/ScreamSkeleton";
+import ProfileSkeleton from "../util/ProfileSkeleton";
 
 // Material Ui
 import Grid from "@material-ui/core/Grid";
@@ -37,7 +39,7 @@ function User(props) {
   const { screams, loading } = props.data;
 
   const screamsMarkup = loading ? (
-    <p>...Loading Data...</p>
+    <ScreamSkeleton />
   ) : screams == null ? (
     <p>No screams from this user</p>
   ) : !screamIdParam ? (
@@ -58,7 +60,7 @@ function User(props) {
       </Grid>
       <Grid item sm={3} xs={12}>
         {profile == null ? (
-          <p>Loading Profile...</p>
+          <ProfileSkeleton />
         ) : (
           <StaticProfile profile={profile} />
         )}

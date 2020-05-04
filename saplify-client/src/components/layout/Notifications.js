@@ -118,7 +118,7 @@ const mapStateToProps = (state) => ({
 
 Notifications.propTypes = {
   markNotificationsRead: PropTypes.func.isRequired,
-  notifications: PropTypes.object.isRequired,
+  notifications: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, { markNotificationsRead })(

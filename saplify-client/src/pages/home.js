@@ -4,6 +4,8 @@ import Profile from "../components/profile/Profile";
 import { connect } from "react-redux";
 import { getScreams } from "../redux/actions/dataActions";
 import PropTypes from "prop-types";
+import ScreamSkeleton from "../util/ScreamSkeleton";
+
 // Material Ui Imports
 import Grid from "@material-ui/core/Grid";
 
@@ -19,7 +21,7 @@ function Home(props) {
       return <Scream key={scream.screamId} scream={scream} />;
     })
   ) : (
-    <p>Loading...</p>
+    <ScreamSkeleton />
   );
 
   return (
