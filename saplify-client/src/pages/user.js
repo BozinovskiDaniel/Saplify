@@ -46,7 +46,7 @@ function User(props) {
     screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
   ) : (
     screams.map((scream) => {
-      if (scream.screamId != screamIdParam) {
+      if (scream.screamId !== screamIdParam) {
         return <Scream key={scream.screamId} scream={scream} />;
       } else return <Scream key={scream.screamId} scream={scream} openDialog />;
     })

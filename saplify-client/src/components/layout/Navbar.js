@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import MyButton from "../../util/myButton";
 import PostScream from "../scream/PostScream";
 import Notifications from "./Notifications";
+import FriendsList from "./FriendsList";
 
 // Material UI Imports
 import AppBar from "@material-ui/core/AppBar";
@@ -29,6 +30,7 @@ function Navbar(props) {
               </MyButton>
             </Link>
             <Notifications />
+            <FriendsList />
           </Fragment>
         ) : (
           <Fragment>

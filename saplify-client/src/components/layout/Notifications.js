@@ -94,7 +94,7 @@ function Notifications(props) {
       <Tooltip title="Notifications">
         <IconButton
           aria-owns={anchorEl ? "simple-menu" : undefined}
-          aria-has-popup="true"
+          aria-haspopup="true"
           onClick={handleOpen}
         >
           {notificationsIcon}

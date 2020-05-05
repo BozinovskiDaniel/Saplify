@@ -54,6 +54,7 @@ exports.signup = (req, res) => {
         //TODO Append token to imageUrl. Work around just add token from image in storage.
         imageUrl: `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${noImg}?alt=media`,
         userId,
+        friends: [],
       };
       return admin
         .firestore()
@@ -288,5 +289,27 @@ exports.markNotificationsRead = (req, res) => {
     .catch((err) => {
       console.error(err);
       return res.status(500).json({ error: err.code });
+    });
+};
+
+exports.addFriend = (req, res) => {
+  // Get the userdetails from the req and add to the senders friends list arr
+  admin
+    .firestore()
+    .doc(`/users/${req.params.handle}`)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        let user = doc.data();
+        admin
+          .firestore()
+          .doc(`/users/${req.user.handle}`)
+          .update({ friends: admin.firestore.FieldValue.arrayUnion(user) });
+        return res.json({ message: "Added to Friends List" });
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(404).json({ error: err.code });
     });
 };
