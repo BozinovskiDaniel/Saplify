@@ -292,6 +292,7 @@ exports.markNotificationsRead = (req, res) => {
     });
 };
 
+// Adds a given friend to the senders friends list
 exports.addFriend = (req, res) => {
   // Get the userdetails from the req and add to the senders friends list arr
   admin

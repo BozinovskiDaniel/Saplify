@@ -46,6 +46,21 @@ app.get("/user/:handle", getUserDetails);
 app.post("/notifications", FBAuth, markNotificationsRead);
 app.get("/user/:handle/addFriend", FBAuth, addFriend);
 
+app.get("/getFriends", FBAuth, (req, res) => {
+  admin
+    .firestore()
+    .doc(`/users/${req.user.handle}`)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        return res.json(doc.data().friends);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(404).json({ error: err.code });
+    });
+});
 exports.api = functions.https.onRequest(app);
 
 // Event handlers
