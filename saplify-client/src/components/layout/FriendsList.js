@@ -35,25 +35,26 @@ function FriendsList(props) {
     setAnchorEl(null);
   };
 
-  let friendsListMarkup = friends ? (
-    friends.map((friend) => {
-      return (
-        <MenuItem key={friend.createdAt} onClick={handleClose}>
-          <PersonIcon color="primary" style={{ marginRight: 10 }} />
-          <Typography
-            component={Link}
-            color="default"
-            variant="body1"
-            to={`/users/${friend.handle}`}
-          >
-            {friend.handle} is your Friend!
-          </Typography>
-        </MenuItem>
-      );
-    })
-  ) : (
-    <MenuItem onClick={handleClose}>You have no friends yet</MenuItem>
-  );
+  let friendsListMarkup =
+    friends && friends.length > 0 ? (
+      friends.map((friend) => {
+        return (
+          <MenuItem key={friend.createdAt} onClick={handleClose}>
+            <PersonIcon color="primary" style={{ marginRight: 10 }} />
+            <Typography
+              component={Link}
+              color="default"
+              variant="body1"
+              to={`/users/${friend.handle}`}
+            >
+              {friend.handle} is your Friend!
+            </Typography>
+          </MenuItem>
+        );
+      })
+    ) : (
+      <MenuItem onClick={handleClose}>You have no friends yet</MenuItem>
+    );
 
   return (
     <Fragment>

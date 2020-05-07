@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import ScreamSkeleton from "../util/ScreamSkeleton";
 import ShortCuts from "../components/layout/ShortCuts";
 import ScreamPost from "../components/scream/ScreamPost";
+import Friends from "../components/profile/Friends";
 
 // Material Ui Imports
 import Grid from "@material-ui/core/Grid";
@@ -37,6 +38,7 @@ function Home(props) {
       </Grid>
       <Grid item sm={3} xs={12}>
         <Profile />
+        <Friends />
       </Grid>
     </Grid>
   );

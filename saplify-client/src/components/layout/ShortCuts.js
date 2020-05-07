@@ -31,6 +31,7 @@ const styles = (theme) => ({
     paddingBottom: "10px",
     fontSize: "20px",
     fontWeight: "400",
+    borderBottom: "3px #32CD32 solid",
   },
 });
 
