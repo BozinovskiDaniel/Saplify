@@ -28,19 +28,21 @@ function Home(props) {
   );
 
   return (
-    <Grid container spacing={3}>
-      <Grid item sm={3} xs={12}>
-        <ShortCuts />
+    <div className="homepageContainer">
+      <Grid container spacing={3}>
+        <Grid item sm={3} xs={12}>
+          <ShortCuts />
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <ScreamPost />
+          {recentScreamsMarkup}
+        </Grid>
+        <Grid item sm={3} xs={12}>
+          <Profile />
+          <Friends />
+        </Grid>
       </Grid>
-      <Grid item sm={6} xs={12}>
-        <ScreamPost />
-        {recentScreamsMarkup}
-      </Grid>
-      <Grid item sm={3} xs={12}>
-        <Profile />
-        <Friends />
-      </Grid>
-    </Grid>
+    </div>
   );
 }
 

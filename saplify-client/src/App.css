@@ -4,9 +4,11 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   background-color: rgb(220, 220, 220);
+  margin: 0;
+  padding: 0;
 }
 
-.container {
+.homepageContainer {
   margin: 90px 60px 0px 60px;
 }
 
