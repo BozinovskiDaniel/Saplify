@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { getScreams } from "../redux/actions/dataActions";
 import PropTypes from "prop-types";
 import ScreamSkeleton from "../util/ScreamSkeleton";
+import ShortCuts from "../components/layout/ShortCuts";
+import ScreamPost from "../components/scream/ScreamPost";
 
 // Material Ui Imports
 import Grid from "@material-ui/core/Grid";
@@ -25,15 +27,17 @@ function Home(props) {
   );
 
   return (
-    <Grid container spacing={2}>
-      <Grid item sm={1} />
-      <Grid item sm={7} xs={12}>
+    <Grid container spacing={3}>
+      <Grid item sm={3} xs={12}>
+        <ShortCuts />
+      </Grid>
+      <Grid item sm={6} xs={12}>
+        <ScreamPost />
         {recentScreamsMarkup}
       </Grid>
       <Grid item sm={3} xs={12}>
         <Profile />
       </Grid>
-      <Grid item sm={1} />
     </Grid>
   );
 }
