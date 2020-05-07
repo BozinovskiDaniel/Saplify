@@ -2,7 +2,7 @@ export default {
   palette: {
     primary: {
       light: "#32CD32",
-      main: "#505050",
+      main: "#404040",
       dark: "#008394",
       contrastText: "#fff",
     },
@@ -19,6 +19,7 @@ export default {
     },
     form: {
       textAlign: "center",
+      paddingTop: 90,
     },
     image: {
       margin: "10px auto 10px auto",

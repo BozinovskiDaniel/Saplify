@@ -6,17 +6,22 @@ import { getUserData } from "../redux/actions/dataActions";
 import StaticProfile from "../components/profile/StaticProfile";
 import ScreamSkeleton from "../util/ScreamSkeleton";
 import ProfileSkeleton from "../util/ProfileSkeleton";
+import ShortCuts from "../components/layout/ShortCuts";
+import ScreamPost from "../components/scream/ScreamPost";
+import Friends from "../components/profile/Friends";
 
 // Material Ui
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Button from "@material-ui/core/Button";
+import CameraAltIcon from "@material-ui/icons/CameraAlt";
 
 // Redux
 import { connect } from "react-redux";
 
 const styles = (theme) => ({
   myContainer: {
-    marginTop: 60,
+    margin: "60px 60px auto 60px",
   },
   coverImage: {
     boxShadow: "inset 0 0 0 100vw rgba(0,0,0,0.25)",
@@ -29,23 +34,80 @@ const styles = (theme) => ({
     width: "100%",
     height: "47vh",
   },
+  insideCover: {
+    zIndex: 1,
+    height: "100%",
+    width: "100%",
+  },
+  editCoverPhotoBtn: {
+    left: "24%",
+    top: "80%",
+    color: "#eee",
+    backgroundColor: "rgba(0,0,0,0.6)",
+    padding: 12,
+    fontSize: 12,
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.0)",
+      outline: "0.5px solid #32CD32",
+    },
+  },
+  addFriendBtn: {
+    left: "70%",
+    top: "80%",
+    backgroundColor: theme.palette.primary.main,
+    color: "#eee",
+    fontWeight: "600",
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.0)",
+      outline: "0.5px solid #32CD32",
+    },
+  },
   selectionBar: {
-    height: "8vh",
+    height: "9vh",
     width: "100%",
     backgroundColor: theme.palette.primary.main,
-    marginBottom: 12,
+    marginBottom: 20,
     color: "white",
     textAlign: "center",
     fontWeight: "500",
+    position: "relative",
   },
   ul: {
     listStyleType: "none",
     margin: 0,
     padding: 0,
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-30%)",
   },
   li: {
     display: "inline",
-    padding: "5px 10px",
+    padding: "5px 30px",
+    top: "100px",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
+  navtitle: {
+    display: "inline",
+    paddingRight: "100px",
+    fontSize: "35px",
+    fontWeight: "700",
+    color: theme.palette.primary.light,
+  },
+  navImageContainer: {
+    position: "absolute",
+    zIndex: 1,
+    left: "9%",
+    bottom: "60%",
+  },
+  navImage: {
+    borderRadius: "50%",
+    height: 185,
+    width: 185,
+    border: "6px solid #eee",
   },
 });
 
@@ -91,10 +153,31 @@ function User(props) {
 
   return (
     <div className={classes.myContainer}>
-      <div className={classes.coverImage} />
+      <div className={classes.coverImage}>
+        <div className={classes.insideCover}>
+          <Button variant="contained" className={classes.editCoverPhotoBtn}>
+            <CameraAltIcon style={{ paddingRight: "10px" }} />
+            Edit Cover Photo
+          </Button>
+          <Button variant="contained" className={classes.addFriendBtn}>
+            Add Friend
+          </Button>
+        </div>
+      </div>
       <div className={classes.selectionBar}>
         <ul className={classes.ul}>
-          <li className={classes.navtitle}></li>
+          <li className={classes.navImageContainer}>
+            {profile ? (
+              <img
+                src={profile.imageUrl}
+                alt="profile image"
+                className={classes.navImage}
+              />
+            ) : null}
+          </li>
+          <li className={classes.navtitle}>
+            {profile ? profile.handle : null}
+          </li>
           <li className={classes.li}>Time line</li>
           <li className={classes.li}>Photos</li>
           <li className={classes.li}>Videos</li>
@@ -103,8 +186,11 @@ function User(props) {
         </ul>
       </div>
       <Grid container spacing={2}>
-        <Grid item sm={1} />
-        <Grid item sm={7} xs={12}>
+        <Grid item sm={3} xs={12}>
+          <ShortCuts />
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <ScreamPost />
           {screamsMarkup}
         </Grid>
         <Grid item sm={3} xs={12}>
@@ -113,6 +199,7 @@ function User(props) {
           ) : (
             <StaticProfile profile={profile} />
           )}
+          <Friends />
         </Grid>
         <Grid item sm={1} />
       </Grid>
