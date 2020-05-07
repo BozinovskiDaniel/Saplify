@@ -9,6 +9,7 @@ import ProfileSkeleton from "../util/ProfileSkeleton";
 import ShortCuts from "../components/layout/ShortCuts";
 import ScreamPost from "../components/scream/ScreamPost";
 import Friends from "../components/profile/Friends";
+import Socials from "../components/layout/Socials";
 
 // Material Ui
 import Grid from "@material-ui/core/Grid";
@@ -187,6 +188,7 @@ function User(props) {
       </div>
       <Grid container spacing={2}>
         <Grid item sm={3} xs={12}>
+          <Socials />
           <ShortCuts />
         </Grid>
         <Grid item sm={6} xs={12}>

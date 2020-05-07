@@ -15,7 +15,6 @@ import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 // Components
 import Navbar from "./components/layout/Navbar";
-import Sidebar from "./components/layout/Sidebar";
 import AuthRoute from "./util/AuthRoute";
 
 // Pages
