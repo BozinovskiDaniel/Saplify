@@ -24,9 +24,9 @@ const styles = (theme) => ({
   },
   userPostImage: {
     borderRadius: 50,
-    height: 80,
-    width: 80,
-    margin: "30px auto 0 50px",
+    height: 70,
+    width: 70,
+    margin: "30px auto 0 30px",
     padding: 5,
   },
   submitButton: {
@@ -40,6 +40,9 @@ const styles = (theme) => ({
   footerPost: {
     display: "inline-block",
     float: "right",
+  },
+  postScream: {
+    padding: "0 10px",
   },
 });
 
@@ -77,19 +80,19 @@ function ScreamPost(props) {
 
   let postScreamMarkup = authenticated ? (
     <Grid container className={classes.myDiv}>
-      <Grid item sm={3}>
+      <Grid item sm={2}>
         <img
           src={imageUrl}
           alt="user image"
           className={classes.userPostImage}
         />
       </Grid>
-      <Grid item sm={8} className={classes.postScream}>
+      <Grid item sm={9} className={classes.postScream}>
         <form onSubmit={handleSubmit}>
           <TextField
             name="body"
             type="text"
-            label="Scream"
+            label="Scream!!"
             multiline
             rows="3"
             placeholder="Scream at your fellow Saplings!"
@@ -107,7 +110,7 @@ function ScreamPost(props) {
               className={classes.submitButton}
               disabled={loading}
             >
-              Submit
+              Post
               {loading && (
                 <CircularProgress
                   size={30}
