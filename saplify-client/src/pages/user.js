@@ -156,13 +156,21 @@ function User(props) {
     <div className={classes.myContainer}>
       <div className={classes.coverImage}>
         <div className={classes.insideCover}>
-          <Button variant="contained" className={classes.editCoverPhotoBtn}>
-            <CameraAltIcon style={{ paddingRight: "10px" }} />
-            Edit Cover Photo
-          </Button>
-          <Button variant="contained" className={classes.addFriendBtn}>
-            Add Friend
-          </Button>
+          {profile ? (
+            profile.handle === props.user.credentials.handle ? (
+              <Button variant="contained" className={classes.editCoverPhotoBtn}>
+                <CameraAltIcon style={{ paddingRight: "10px" }} />
+                Edit Cover Photo
+              </Button>
+            ) : null
+          ) : null}
+          {profile ? (
+            profile.handle != props.user.credentials.handle ? (
+              <Button variant="contained" className={classes.addFriendBtn}>
+                Add Friend
+              </Button>
+            ) : null
+          ) : null}
         </div>
       </div>
       <div className={classes.selectionBar}>
@@ -192,7 +200,11 @@ function User(props) {
           <ShortCuts />
         </Grid>
         <Grid item sm={6} xs={12}>
-          <ScreamPost />
+          {profile ? (
+            profile.handle === props.user.credentials.handle ? (
+              <ScreamPost />
+            ) : null
+          ) : null}
           {screamsMarkup}
         </Grid>
         <Grid item sm={3} xs={12}>
@@ -212,10 +224,12 @@ function User(props) {
 User.propTypes = {
   getUserData: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   data: state.data,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, { getUserData })(

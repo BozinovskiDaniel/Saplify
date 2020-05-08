@@ -8,7 +8,6 @@ import ScreamSkeleton from "../util/ScreamSkeleton";
 import ShortCuts from "../components/layout/ShortCuts";
 import ScreamPost from "../components/scream/ScreamPost";
 import Friends from "../components/profile/Friends";
-import WeatherSection from "../components/layout/WeatherSection";
 
 // Material Ui Imports
 import Grid from "@material-ui/core/Grid";
@@ -32,8 +31,6 @@ function Home(props) {
     <div className="homepageContainer">
       <Grid container spacing={3}>
         <Grid item sm={3} xs={12}>
-          {props.user.credentials.locations ? <WeatherSection /> : null}
-          {console.log(props)}
           <ShortCuts />
         </Grid>
         <Grid item sm={6} xs={12}>

@@ -59,16 +59,7 @@ function Friends(props) {
   const {
     classes,
     user: {
-      credentials: {
-        handle,
-        createdAt,
-        imageUrl,
-        email,
-        bio,
-        website,
-        location,
-        friends,
-      },
+      credentials: { friends },
       authenticated,
     },
   } = props;

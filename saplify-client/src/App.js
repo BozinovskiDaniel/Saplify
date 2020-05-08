@@ -40,7 +40,6 @@ if (token) {
 }
 
 function App() {
-  const drawerWidth = 240;
   return (
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>

@@ -75,7 +75,7 @@ function Scream(props) {
         </Typography>
         {deleteButton}
         <Typography variant="body2" color="textSecondary">
-          Published: {dayjs(createdAt).fromNow()}
+          {dayjs(createdAt).fromNow()}
         </Typography>
         <Typography variant="body1">{body}</Typography>
         <LikeButton screamId={screamId} />
