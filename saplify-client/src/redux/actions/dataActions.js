@@ -11,6 +11,7 @@ import {
   SET_SCREAM,
   STOP_LOADING_UI,
   SUBMIT_COMMENT,
+  GET_CURRENT_WEATHER,
 } from "../types";
 import axios from "axios";
 
@@ -130,6 +131,24 @@ export const getUserData = (userHandle) => (dispatch) => {
         type: SET_SCREAMS,
         payload: null,
       });
+    });
+};
+
+export const getCurrentWeather = (location) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  const API_KEY = "fba73d1121744a588e3234727201604";
+  const url = "http://api.weatherapi.com/v1/current.json?key=";
+  axios
+    .get(url + API_KEY + location)
+    .then((result) => {
+      console.log(result.data);
+      dispatch({
+        type: GET_CURRENT_WEATHER,
+        payload: result.data,
+      });
+    })
+    .catch((err) => {
+      console.error(err);
     });
 };
 

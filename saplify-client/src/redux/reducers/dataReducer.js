@@ -7,11 +7,13 @@ import {
   POST_SCREAM,
   SET_SCREAM,
   SUBMIT_COMMENT,
+  GET_CURRENT_WEATHER,
 } from "../types";
 
 const initialState = {
   screams: [],
   scream: {},
+  weather: {},
   loading: false,
 };
 
@@ -65,6 +67,11 @@ export default function (state = initialState, action) {
           ...state.scream,
           comments: [action.payload, ...state.scream.comments],
         },
+      };
+    case GET_CURRENT_WEATHER:
+      return {
+        ...state,
+        weather: action.payload,
       };
     default:
       return state;
