@@ -20,8 +20,8 @@ const styles = (theme) => ({
 });
 
 function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("Daniel@email.com");
+  const [password, setPassword] = useState("123456");
   const [errors, setErrors] = useState(props);
 
   const {

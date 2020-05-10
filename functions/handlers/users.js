@@ -1,9 +1,8 @@
 const { admin } = require("../util/admin");
-
+const firebase = require("firebase");
 const config = require("../util/config");
 const { uuid } = require("uuidv4");
 
-const firebase = require("firebase");
 firebase.initializeApp(config);
 
 const {
@@ -217,6 +216,8 @@ exports.uploadImage = (req, res) => {
   const path = require("path");
   const os = require("os");
   const fs = require("fs");
+  console.log(req);
+  console.log("HELLO PLEASE WORK ):");
 
   const busboy = new BusBoy({ headers: req.headers });
 
@@ -226,7 +227,6 @@ exports.uploadImage = (req, res) => {
   let generatedToken = uuid();
 
   busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
-    console.log(fieldname, file, filename, encoding, mimetype);
     if (mimetype !== "image/jpeg" && mimetype !== "image/png") {
       return res.status(400).json({ error: "Wrong file type submitted" });
     }
@@ -257,7 +257,10 @@ exports.uploadImage = (req, res) => {
       .then(() => {
         // Append token to url
         const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${config.storageBucket}/o/${imageFileName}?alt=media&token=${generatedToken}`;
-        return db.doc(`/users/${req.user.handle}`).update({ imageUrl });
+        return admin
+          .firestore()
+          .doc(`/users/${req.user.handle}`)
+          .update({ imageUrl });
       })
       .then(() => {
         return res.json({ message: "image uploaded successfully" });
@@ -271,9 +274,11 @@ exports.uploadImage = (req, res) => {
 };
 
 exports.markNotificationsRead = (req, res) => {
-  let batch = db.batch();
+  let batch = admin.firestore().batch();
   req.body.forEach((notificationId) => {
-    const notification = db.doc(`/notifications/${notificationId}`);
+    const notification = admin
+      .firestore()
+      .doc(`/notifications/${notificationId}`);
     batch.update(notification, { read: true });
   });
   batch

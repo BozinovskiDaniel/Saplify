@@ -66,6 +66,7 @@ export const getUserData = () => (dispatch) => {
 
 export const uploadImage = (formData) => (dispatch) => {
   dispatch({ type: LOADING_USER });
+  console.log(formData);
   axios
     .post("/user/image", formData)
     .then(() => {

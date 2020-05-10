@@ -78,16 +78,20 @@ function ScreamPost(props) {
     props.postScream({ body });
   };
 
+  const profile = "/users/".concat(handle);
+
   let postScreamMarkup = authenticated ? (
     <Grid container className={classes.myDiv}>
-      <Grid item sm={2}>
-        <img
-          src={imageUrl}
-          alt="user image"
-          className={classes.userPostImage}
-        />
+      <Grid item sm={3}>
+        <a href={profile}>
+          <img
+            src={imageUrl}
+            alt="user image"
+            className={classes.userPostImage}
+          />
+        </a>
       </Grid>
-      <Grid item sm={9} className={classes.postScream}>
+      <Grid item sm={8} className={classes.postScream}>
         <form onSubmit={handleSubmit}>
           <TextField
             name="body"
