@@ -26,8 +26,7 @@ const styles = (theme) => ({
   },
   coverImage: {
     boxShadow: "inset 0 0 0 100vw rgba(0,0,0,0.25)",
-    background:
-      "url(https://images.pexels.com/photos/610293/pexels-photo-610293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)",
+    background: `url()`,
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
     backgroundSize: "cover",
@@ -116,7 +115,10 @@ const styles = (theme) => ({
 function User(props) {
   const [profile, setProfile] = useState(null);
   const [screamIdParam, setScreamIdParam] = useState(null);
-  const { classes } = props;
+  const {
+    classes,
+    user: { credentials },
+  } = props;
 
   useEffect(() => {
     const handle = props.match.params.handle;
@@ -155,6 +157,7 @@ function User(props) {
   return (
     <div className={classes.myContainer}>
       <div className={classes.coverImage}>
+        {console.log({ credentials })}
         <div className={classes.insideCover}>
           {profile ? (
             profile.handle === props.user.credentials.handle ? (
