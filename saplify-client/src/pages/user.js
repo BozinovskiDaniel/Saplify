@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import Scream from "../components/scream/Scream";
@@ -165,7 +165,7 @@ function User(props) {
             ) : null
           ) : null}
           {profile ? (
-            profile.handle != props.user.credentials.handle ? (
+            profile.handle !== props.user.credentials.handle ? (
               <Button variant="contained" className={classes.addFriendBtn}>
                 Add Friend
               </Button>

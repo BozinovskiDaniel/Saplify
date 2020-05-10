@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 // Material Ui
 import Menu from "@material-ui/core/Menu";
@@ -7,14 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 
 // Icons
 import PeopleIcon from "@material-ui/icons/People";
 import PersonIcon from "@material-ui/icons/Person";
 
 // Redux
-import { connect } from "react-redux";
 import axios from "axios";
 
 function FriendsList(props) {

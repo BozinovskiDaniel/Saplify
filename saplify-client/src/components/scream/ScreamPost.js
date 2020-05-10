@@ -7,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import MusicNoteIcon from "@material-ui/icons/MusicNote";
 
 // Redux
 import { connect } from "react-redux";
@@ -53,7 +52,7 @@ function ScreamPost(props) {
   const {
     classes,
     user: {
-      credentials: { handle, createdAt, imageUrl, bio, website, location },
+      credentials: { handle, imageUrl },
       authenticated,
     },
     UI: { loading },
