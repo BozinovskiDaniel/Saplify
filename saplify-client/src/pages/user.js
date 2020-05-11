@@ -26,7 +26,6 @@ const styles = (theme) => ({
   },
   coverImage: {
     boxShadow: "inset 0 0 0 100vw rgba(0,0,0,0.25)",
-    background: `url()`,
     backgroundRepeat: "no-repeat",
     backgroundAttachment: "fixed",
     backgroundSize: "cover",
@@ -92,7 +91,8 @@ const styles = (theme) => ({
   },
   navtitle: {
     display: "inline",
-    paddingRight: "100px",
+    paddingRight: "80px",
+    paddingLeft: "20px",
     fontSize: "35px",
     fontWeight: "700",
     color: theme.palette.primary.light,
@@ -108,6 +108,7 @@ const styles = (theme) => ({
     height: 185,
     width: 185,
     border: "6px solid #eee",
+    objectFit: "cover",
   },
 });
 
@@ -117,7 +118,10 @@ function User(props) {
   const [screamIdParam, setScreamIdParam] = useState(null);
   const {
     classes,
-    user: { credentials },
+    user: {
+      credentials: { coverPhotoUrl },
+      authenticated,
+    },
   } = props;
 
   useEffect(() => {
@@ -156,10 +160,14 @@ function User(props) {
 
   return (
     <div className={classes.myContainer}>
-      <div className={classes.coverImage}>
-        {console.log({ credentials })}
+      <div
+        className={classes.coverImage}
+        style={{
+          background: `url(${coverPhotoUrl})`,
+        }}
+      >
         <div className={classes.insideCover}>
-          {profile ? (
+          {profile && authenticated ? (
             profile.handle === props.user.credentials.handle ? (
               <Button variant="contained" className={classes.editCoverPhotoBtn}>
                 <CameraAltIcon style={{ paddingRight: "10px" }} />
@@ -167,7 +175,7 @@ function User(props) {
               </Button>
             ) : null
           ) : null}
-          {profile ? (
+          {profile && authenticated ? (
             profile.handle !== props.user.credentials.handle ? (
               <Button variant="contained" className={classes.addFriendBtn}>
                 Add Friend
@@ -192,7 +200,6 @@ function User(props) {
           </li>
           <li className={classes.li}>Time line</li>
           <li className={classes.li}>Photos</li>
-          <li className={classes.li}>Videos</li>
           <li className={classes.li}>Friends</li>
           <li className={classes.li}>About</li>
         </ul>

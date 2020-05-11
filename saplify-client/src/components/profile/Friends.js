@@ -65,7 +65,7 @@ function Friends(props) {
   } = props;
 
   let friendsListMarkup =
-    friends && authenticated ? (
+    friends && authenticated && friends.length > 0 ? (
       <Grid container className={classes.myContainer}>
         <Grid item sm={12} style={{ paddingBottom: "20px" }}>
           <div className={classes.title}>Friends</div>

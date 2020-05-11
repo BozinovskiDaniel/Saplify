@@ -27,6 +27,7 @@ const styles = (theme) => ({
     width: 70,
     margin: "30px auto 0 30px",
     padding: 5,
+    objectFit: "cover",
   },
   submitButton: {
     position: "relative",
