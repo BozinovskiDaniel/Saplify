@@ -136,10 +136,10 @@ export const getUserData = (userHandle) => (dispatch) => {
 
 export const getCurrentWeather = (location) => (dispatch) => {
   dispatch({ type: LOADING_DATA });
-  const API_KEY = "fba73d1121744a588e3234727201604";
-  const url = "http://api.weatherapi.com/v1/current.json?key=";
+  const API_KEY = "fba73d1121744a588e3234727201604&q=";
+  const url = "https://api.weatherapi.com/v1/forecast.json?key=";
   axios
-    .get(url + API_KEY + location)
+    .get(url + API_KEY + location + "&days=7")
     .then((result) => {
       console.log(result.data);
       dispatch({

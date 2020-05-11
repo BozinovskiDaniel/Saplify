@@ -29,8 +29,7 @@ const styles = (theme) => ({
     padding: 12,
     fontSize: 12,
     "&:hover": {
-      backgroundColor: "rgba(0,0,0,0.0)",
-      outline: "0.5px solid #32CD32",
+      backgroundColor: "rgba(0,0,0,0.2)",
     },
   },
   addFriendBtn: {

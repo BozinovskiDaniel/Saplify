@@ -1,5 +1,6 @@
 import React from "react";
 import { logoutUser } from "../../redux/actions/userActions";
+import { Link } from "react-router-dom";
 
 // Material UI
 import List from "@material-ui/core/List";
@@ -22,6 +23,7 @@ const styles = (theme) => ({
     backgroundColor: "#fff",
     borderRadius: 5,
     padding: 10,
+    marginBottom: 20,
   },
   title: {
     marginLeft: "16px",
@@ -30,6 +32,9 @@ const styles = (theme) => ({
     fontSize: "20px",
     fontWeight: "400",
     borderBottom: "3px #32CD32 solid",
+  },
+  link: {
+    color: "#000",
   },
 });
 
@@ -44,12 +49,14 @@ function ShortCuts(props) {
     <div className={classes.root}>
       <div className={classes.title}>Shortcuts</div>
       <List component="nav" aria-label="main mailbox folders">
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="News Feed" />
-        </ListItem>
+        <Link to="/" className={classes.link}>
+          <ListItem button>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="News Feed" />
+          </ListItem>
+        </Link>
 
         <ListItem button>
           <ListItemIcon>

@@ -8,6 +8,7 @@ import ScreamSkeleton from "../util/ScreamSkeleton";
 import ShortCuts from "../components/layout/ShortCuts";
 import ScreamPost from "../components/scream/ScreamPost";
 import Friends from "../components/profile/Friends";
+import Weather from "../components/layout/Weather";
 
 // Material Ui Imports
 import Grid from "@material-ui/core/Grid";
@@ -32,6 +33,7 @@ function Home(props) {
       <Grid container spacing={3}>
         <Grid item sm={3} xs={12}>
           <ShortCuts />
+          <Weather />
         </Grid>
         <Grid item sm={6} xs={12}>
           <ScreamPost />
@@ -53,7 +55,6 @@ Home.propTypes = {
 
 const mapStateToProps = (state) => ({
   data: state.data,
-  weather: state.weather,
   user: state.user,
 });
 
