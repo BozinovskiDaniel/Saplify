@@ -84,11 +84,7 @@ function ScreamPost(props) {
     <Grid container className={classes.myDiv}>
       <Grid item sm={3}>
         <a href={profile}>
-          <img
-            src={imageUrl}
-            alt="user image"
-            className={classes.userPostImage}
-          />
+          <img src={imageUrl} alt="user" className={classes.userPostImage} />
         </a>
       </Grid>
       <Grid item sm={8} className={classes.postScream}>

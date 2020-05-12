@@ -27,12 +27,43 @@ const styles = (theme) => ({
   forecast: {
     backgroundColor: "rgba(137, 196, 244, 0.85)",
     width: "100%",
+    marginBottom: 35,
+  },
+  forecastDay: {
+    padding: "5px 30px",
   },
   weatherIcon: {
     width: "100px",
     height: "100px",
   },
+  weatherDate: {
+    borderRadius: "15px 0 0 15px",
+    backgroundColor: "#32CD32",
+  },
 });
+
+var month = new Array();
+month[0] = "JAN";
+month[1] = "FEB";
+month[2] = "MAR";
+month[3] = "APR";
+month[4] = "MAY";
+month[5] = "JUN";
+month[6] = "JUL";
+month[7] = "AUG";
+month[8] = "SEP";
+month[9] = "OCT";
+month[10] = "NOV";
+month[11] = "DEC";
+
+var weekday = new Array(7);
+weekday[0] = "Sun";
+weekday[1] = "Mon";
+weekday[2] = "Tue";
+weekday[3] = "Wed";
+weekday[4] = "Thu";
+weekday[5] = "Fri";
+weekday[6] = "Sat";
 
 function Weather(props) {
   useEffect(() => {
@@ -51,7 +82,8 @@ function Weather(props) {
           sm={12}
           direction="row"
           justify="center"
-          alignItems="center"
+          alignItems="flex-end"
+          style={{ padding: "20px 0 0 0" }}
         >
           <img
             src={weather.current.condition.icon}
@@ -60,27 +92,85 @@ function Weather(props) {
           />
         </Grid>
         <Grid item sm={12} style={{ padding: "40px 0" }}>
-          <Grid container spacing={1}>
-            <Grid item sm={3}>
-              {weather.current.temp_c}°
-            </Grid>
-            <Grid item sm={6}>
+          <Grid container>
+            <Grid item sm={1} />
+            <Grid item sm={8}>
               <Grid container spacing={1}>
-                <Grid item sm={12}>
-                  {weather.current.condition.text}
+                <Grid container item sm={12}>
+                  <Typography variant="h4">
+                    {weather.current.temp_c}°
+                  </Typography>
                 </Grid>
                 <Grid item sm={12}>
-                  {weather.location.name}, {weather.location.region}
+                  <Typography variant="h5">
+                    {weather.current.condition.text}
+                  </Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <Typography variant="h7">
+                    {weather.location.name}, {weather.location.region}
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item sm={3}>
-              date
+            <Grid container item sm={3} className={classes.weatherDate}>
+              <Grid
+                item
+                sm={12}
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-end"
+              >
+                <Typography variant="h6">
+                  {month[new Date().getMonth()]}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                sm={12}
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+              >
+                <Typography variant="h5">
+                  <bold>{new Date().getDate()}</bold>
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item sm={12} className={classes.forecast}>
-          <p>hello</p>
+        <Grid
+          container
+          item
+          sm={12}
+          className={classes.forecast}
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
+          {weather.forecast.forecastday.map((day, index) => {
+            return (
+              <Grid item className={classes.forecastDay}>
+                <Grid item sm={12}>
+                  <Typography variant="body2">
+                    {weekday[new Date().getDay() + index + 1]}
+                  </Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <img
+                    src={day.day.condition.icon}
+                    width="35px"
+                    height="35px"
+                  />
+                </Grid>
+                <Grid item sm={12}>
+                  <Typography variant="body2">{day.day.avgtemp_c}°</Typography>
+                </Grid>
+              </Grid>
+            );
+          })}
         </Grid>
         <Grid item sm={12} />
       </Grid>

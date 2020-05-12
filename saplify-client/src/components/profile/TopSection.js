@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
+import { uploadCoverImage } from "../../redux/actions/userActions";
 
 // Material UI
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -183,9 +184,15 @@ function TopSection(props) {
   );
 }
 
+TopSection.propTypes = {
+  uploadCoverImage: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   data: state.data,
   user: state.user,
 });
 
-export default connect(mapStateToProps, null)(withStyles(styles)(TopSection));
+export default connect(mapStateToProps, { uploadCoverImage })(
+  withStyles(styles)(TopSection)
+);

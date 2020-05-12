@@ -64,7 +64,7 @@ function EditDetails(props) {
   useEffect(() => {
     const { credentials } = props;
     mapUserDetailsToState(credentials);
-  }, []);
+  }, [props]);
 
   return (
     <Fragment>

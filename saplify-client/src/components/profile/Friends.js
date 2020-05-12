@@ -117,7 +117,6 @@ function Friends(props) {
 
 Friends.propTypes = {
   user: PropTypes.object.isRequired,
-  authenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
