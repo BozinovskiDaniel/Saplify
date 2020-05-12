@@ -1,15 +1,18 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// Material Ui
+import MyButton from "../../util/myButton";
+
+// Material UI
 import Menu from "@material-ui/core/Menu";
 import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
+import Grid from "@material-ui/core/Grid";
 
 // Icons
 import PeopleIcon from "@material-ui/icons/People";
-import PersonIcon from "@material-ui/icons/Person";
+import DeleteOutline from "@material-ui/icons/DeleteOutline";
 
 // Redux
 import axios from "axios";
@@ -17,6 +20,8 @@ import axios from "axios";
 function FriendsList(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [friends, setFriends] = useState([]);
+
+  const { classes } = props;
 
   useEffect(() => {
     axios.get("/getFriends").then((res) => {
@@ -32,20 +37,50 @@ function FriendsList(props) {
     setAnchorEl(null);
   };
 
+  const removeFriend = () => {
+    alert("Friend removed!");
+  };
+
   let friendsListMarkup =
     friends && friends.length > 0 ? (
       friends.map((friend) => {
         return (
           <MenuItem key={friend.createdAt} onClick={handleClose}>
-            <PersonIcon color="primary" style={{ marginRight: 10 }} />
-            <Typography
-              component={Link}
-              color="default"
-              variant="body1"
-              to={`/users/${friend.handle}`}
+            <Grid
+              container
+              spacing={1}
+              direction="row"
+              justify="center"
+              alignItems="center"
             >
-              {friend.handle} is your Friend!
-            </Typography>
+              <Grid item sm={3}>
+                <img
+                  src={friend.imageUrl}
+                  style={{
+                    marginRight: 10,
+                    borderRadius: 50,
+                    objectFit: "cover",
+                  }}
+                  height="50px"
+                  width="50px"
+                />
+              </Grid>
+              <Grid item sm={7}>
+                <Typography
+                  component={Link}
+                  color="default"
+                  variant="body1"
+                  to={`/users/${friend.handle}`}
+                >
+                  {friend.handle} is your friend!
+                </Typography>
+              </Grid>
+              <Grid item sm={2}>
+                <MyButton tip="Remove friend" onClick={removeFriend}>
+                  <DeleteOutline color="secondary" />
+                </MyButton>
+              </Grid>
+            </Grid>
           </MenuItem>
         );
       })
