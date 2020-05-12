@@ -33,6 +33,11 @@ const styles = (theme) => ({
     position: "relative",
     marginBottom: "5px",
     marginTop: "5px",
+    backgroundColor: theme.palette.primary.light,
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "rgba(64, 64, 64, 0.75)",
+    },
   },
   progressSpinner: {
     position: "absolute",
@@ -106,7 +111,6 @@ function ScreamPost(props) {
             <Button
               type="submit"
               variant="contained"
-              color="primary"
               className={classes.submitButton}
               disabled={loading}
             >

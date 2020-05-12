@@ -19,7 +19,7 @@ const styles = (theme) => ({
     backgroundAttachment: "fixed",
     backgroundSize: "cover",
     backgroundPosition: "center",
-    boxShadow: "inset 0 0 0 100vw rgba(44, 130, 201, 0.6)",
+    boxShadow: "inset 0 0 0 100vw rgba(44, 130, 201, 0.7)",
     borderRadius: 5,
     marginBottom: 20,
     color: "#fff",
@@ -38,7 +38,7 @@ const styles = (theme) => ({
   },
   weatherDate: {
     borderRadius: "15px 0 0 15px",
-    backgroundColor: "#32CD32",
+    backgroundColor: "rgba(50,205,50, 0.8)",
   },
 });
 
@@ -135,7 +135,7 @@ function Weather(props) {
                 alignItems="flex-start"
               >
                 <Typography variant="h5">
-                  <bold>{new Date().getDate()}</bold>
+                  <b>{new Date().getDate()}</b>
                 </Typography>
               </Grid>
             </Grid>
@@ -155,7 +155,7 @@ function Weather(props) {
               <Grid item className={classes.forecastDay}>
                 <Grid item sm={12}>
                   <Typography variant="body2">
-                    {weekday[new Date().getDay() + index + 1]}
+                    <b>{weekday[new Date().getDay() + index + 1]}</b>
                   </Typography>
                 </Grid>
                 <Grid item sm={12}>
